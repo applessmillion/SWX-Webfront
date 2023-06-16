@@ -1,4 +1,12 @@
-/* Pet care & logic functions file. */
+/*! 
+* SmallWorlds X JavaScript Pet Widget Care
+* Description: Handles caring modes for the pet.
+* Author: Benjamin Robert
+* Author: Justin Schwertmann
+* URI: https://www.smallworlds.app/
+* Created: 6/12/23
+* Last Edited: 6/15/23
+*/
 
 // ----- VARIABLES AND CONSTANTS
 let careMode = 0; // Mode of care. Ranges 1-3 for active care and 0 for no care mode.
