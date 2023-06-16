@@ -1,5 +1,4 @@
 /*! 
-* this is duplicated for simplicity during testing. final resting place is https://content.smallworlds.app/web/js/api.js
 * SmallWorlds X JavaScript Web API 
 * Description: Rewritten API file focusing on calls to display webpages outside of the main Flash app.
 * Author: Benjamin Robert
@@ -12,12 +11,13 @@ const swAPIURL = 'https://smallworlds.app/api/'; // We do not deviate from this 
 var response_data; 	// Basic variable to store API response.
 var has_api_loaded = true; // Report if our initAPI() function has run and loaded.
 var has_api_online; // Report status of API endpoint based on initAPI() fetch.
+var has_been_warned; // Has the console been told the API is down (if it is)?
 initAPI(); // Test for API connectivity.
 
 
-async function initAPI(callbackFunction=''){
+async function initAPI(callbackFunction=null){
 	let controller = new AbortController(); // Will allow us to timeout API test.
-	let apiTimeout = 3000; // 3 seconds
+	let apiTimeout = 1500; // 1.5 seconds
 	const timeoutId = setTimeout(() => {controller.abort();}, apiTimeout); // Start 3s timeout
 	
 	// Test the API & world status and wait for a response <= apiTimeout
@@ -28,7 +28,10 @@ async function initAPI(callbackFunction=''){
 		.catch(error => {
 			if(error.name === 'AbortError'){
 				// Error due to timeout on API request.
-				console.log("API offline.");
+				if(!has_been_warned){ console.log("API offline."); }
+				
+				// Dismiss further warnings
+				has_been_warned = true;
 			}else{
 				// Error due to some other reason.
 				console.log("Recieved response, but it was unexpected.");
@@ -46,7 +49,7 @@ async function getAPIresponse(endpoint){
 	if(!has_api_loaded) { console.log("API is not loaded. How are you running this?"); initAPI(); }
 	
 	// If our API is not online, do not try to process requests.
-	if(!has_api_online) { console.log("API is offline. API requests will not be processed. Please refresh the page to try again."); return null; }
+	if(!has_api_online && !has_been_warned) { console.log("API is offline. API requests will not be processed. Please refresh the page to try again."); return null; }
 	
 	await fetch(swAPIURL+endpoint)
 	  .then(response => response.json()) // Extract JSON data from the response
