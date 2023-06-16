@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Profile | SmallWorlds X</title>
+	<meta name="description" content="Your page description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Profile | SmallWorlds X">
+	<meta property="og:description" content="Profile page on SmallWorlds X">
+	<meta property="og:image" content="">
+	<meta property="og:url" content="https://smallworlds.app">
+  <script src="includes/js/api.js"></script>
+  <link rel="stylesheet" href="includes/css/common.css"> 
+  <link rel="stylesheet" href="includes/css/profile.css"> 
+  <link rel="stylesheet" href="includes/css/colors.css"> 
+  <script src="includes/js/profile.js"></script>
+  <style>
+:root{
+	--bg-1:#2d7990d1;
+	--bg-2:#caf3ffeb;
+	--border-2:#caf3ff;
+	--border-1:#27697d;
+	--border-base:#DADADA;
+	--bg-base:#FFF;
+	--font-1:#092d4d;
+	--font-2:#FFF;
+}
+button{ margin:2px; }
+html,body{ 
+	padding:0px!important;
+	margin:0!important;
+	display: flex;
+	flex-direction: column;
+	align-content: space-around;
+	align-items: center;
+}
+html{ 
+	background:var(--bg-base) url("https://media.smallworlds.app/web/background-town_center.png") no-repeat; 
+	background-size:cover;
+}
+header{
+	margin-bottom:65px;
+}
+h1,h2,h3,h4{ font-family: font-header, "Helvetica Neue", Helvetica, Arial, sans-serif; margin-bottom:5px;line-height:1.05; }
+main{
+width: clamp(780px,60vw,1260px);
+display:flex;
+flex-direction:row;
+}
+#profile-content{
+	width:70%;
+	height:clamp(300px,100%,100%);
+    background-color: var(--bg-2);
+	padding:15px 35px;
+	margin-top:52px;
+    border: 1px var(--border-2) solid;
+	border-radius:0px 15px 0px 0px;
+}
+#profile-character{
+	width:30%;
+	height:clamp(300px,100%,100%);
+	margin-top:15px;
+}
+
+#character-profile-heading{
+	border:1px solid var(--border-1);
+	border-radius:12px 12px 0px 0px;
+	background-color:var(--bg-1);
+	padding:5px 8px;
+	flex-direction:row;
+	justify-content:space-between;
+	display:flex;
+	color:var(--font-2);
+	text-transform: uppercase;
+	height:25px;
+}
+
+#character-carousel{
+	display: flex;
+	height:250px;
+	background:var(--bg-base);
+	align-content: space-between;
+	flex-direction: row;
+	justify-content: space-evenly;
+	border:1px solid var(--border-base);
+	border-top:0px;
+}
+
+#character-options-buttons{
+	background:var(--bg-base);
+	display:flex;
+	flex-direction:row;
+	justify-content: space-evenly;
+	padding:10px 0px;
+}
+
+#character-options, #character-profile-info{
+	padding:8px 12px;
+	background:var(--bg-base);
+	display:flex;
+	flex-direction:column;
+	justify-content: space-evenly;
+	align-items:center;
+}
+
+
+#character-delete{ color:red;font-size:bold; }
+.character-btn{ 
+	font:11px font-header, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	border-radius:0px;
+	border:1px solid #cfcfdf;
+	background-color:#dfdfef;
+	padding:4px 6px;
+	display:flex;
+	align-items:center;
+	text-transform: uppercase;
+	font-weight: bold;
+	transition:0.2s;
+	color:var(--font-1);
+}
+.character-btn:hover{
+	border:1px solid #bebeca;
+	background-color:#cfcfdf;
+}
+
+.space-btn{ 
+	font:13px font-header, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	border-radius:0px;
+	border:1px solid #84a472;
+	background-color:#a2c88d;
+	padding:6px 10px;
+	text-transform: uppercase;
+	font-weight: bold;
+	transition:0.2s;
+	color:var(--font-2);
+}
+.space-btn:hover{
+	border:1px solid #728e62;
+	background-color:#84a472;
+}
+.character-btn img{ padding-right:4px; }
+.no-interact{ pointer-events: none;}
+.div-25{ width:25% }
+.div-75{ width:75%; }
+
+.space-icon{
+	border-radius:8px;
+	margin-bottom:8px;
+	max-width:90px;
+}
+
+.space-grid-item{
+	width: 18.25%;
+	padding: 12px 10px;
+	background: var(--bg-1);
+	color:var(--font-2);
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	margin: 15px 0px;
+	border-radius: 8px;
+}
+
+.space-grid-item .space-name{ 
+	font-size:1.15em;
+	padding:5px;
+}
+
+.scallop-tile-bottom{ background:url('https://media.smallworlds.app/web/scallop_bottom_tile.png') repeat-x;}
+.scallop-tile-top{ background:url('https://media.smallworlds.app/web/scallop_top_tile.png') repeat-x;}
+.scallop-tile-top, .scallop-tile-bottom{
+	min-height:6px!important;
+	padding:0;
+	margin:0;
+}
+
+#featured-grid, #widgetGrid{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+#accountBalances{
+	border:1px solid var(--border-1);
+	border-radius:30px;
+	background-color:var(--bg-1);
+	padding:16px 18px;
+	flex-direction:row;
+	justify-content:space-between;
+	display:flex;
+	color:var(--font-2);
+	text-transform: uppercase;
+	align-items:center;
+	margin-top:-46px;
+}
+
+#clockWidget{
+	border:1px solid var(--border-1);
+	border-radius:10px;
+	background-color:var(--bg-1);
+	padding:6px 18px;
+	flex-direction:column;
+	justify-content:space-between;
+	display:flex;
+	color:var(--font-2);
+	text-transform: uppercase;
+	text-align:center;
+	align-items:center;
+}
+#clockWidgetTime{
+	max-width:70%;
+	font-size:2.25em;
+	font-weight:600;
+}
+
+.clock-display{
+	flex-direction:row;
+	justify-content:space-between;
+	display:flex;
+	padding:8px;
+}
+
+.clock-animate{
+  animation: clockSeperatorColor 1s linear infinite alternate;
+}
+
+.clock-status{
+	width:16px;
+	height:16px;
+	margin-right:8px;
+	border-radius:100%;
+	background-color:grey;
+	border:1px black solid;
+}
+
+.status-online{
+	background-color:#41e341;
+	border:1px #287528 solid;
+	box-shadow:0px 0px 5px #41e341, inset 1px -2px 2px #358835da;
+}
+
+.status-offline{
+	background-color:#e34141;
+	border:1px #752828 solid;
+	box-shadow:0px 0px 5px #e34141, inset 1px -2px 2px #883535db;
+}
+
+.btn-enter-world{
+	width:100%;
+	text-align:center;
+	font-weight:600;
+}
+
+
+@keyframes clockSeperatorColor{
+  0% {color: white;}
+  10% {color: white;}
+  100% {color: #bebebe;}
+}
+</style>
+</head>
+<body>  
+  <header>
+    <h1>SmallWorlds X Homepage</h1>
+	<div id="clockWidget">
+		<div id="clockWidgetTime" class="clock-display">
+			<div id="clockHour" class="clock-timer">00</div>
+			<div id="clockSeperator" class="clock-timer clock-animate"> : </div>
+			<div id="clockMinute" class="clock-timer">00</div>
+			<div id="clockLabel" class="clock-timer">SWT</div>
+		</div>
+		<div id="clockWidgetStatus" class="clock-display">
+			<div id="clockStatus" class="clock-status"></div>
+			<div id="clockPlayers">x Playing Now</div>
+		</div>
+  </header>
+  <main>
+    <section id="profile-character">
+      <div id="character-profile">
+		<div id="character-profile-heading">
+			<div class="heading-light heading-caps">Pick your Avatar</div>
+			<button id="avatar-new" class="character-btn" onClick="location.href='avatar/create/'"><img id="avatarNew" src="https://media.smallworlds.app/web/icon/avatar_create.png"> New</button>
+		</div>
+		<div id="character-profile-info">
+			<div id="character-count" class="heading-alt heading-caps">Avatar x of x</div>
+			<h2 id="character-name" class="heading-color">John SmallWorlds</h2>
+		</div>
+		<div id="character-carousel" class="carousel slide">
+			<img id="avatar" src="https://avatars.smallworlds.app/avatar_sillhoutte.png" class="no-interact">
+			<img id="avatar-pet" src="" class="no-interact">
+		</div>
+		<div id="character-options">
+			<button class="space-btn btn-enter-world">ENTER WORLD</button>
+			<div id="character-options-buttons">
+				<button id="character-default" class="character-btn"><img id="avatarDefaultIcon" src="https://media.smallworlds.app/web/icon/heart.png"> Default</button>
+				<button id="character-motto" class="character-btn"><img src="https://media.smallworlds.app/web/icon/motto_small.png"> Motto</button>
+				<button id="character-delete" class="character-btn"><img id="avatarDeleteIcon" src="https://media.smallworlds.app/web/icon/avatar_delete.png"> Delete</button>
+			</div>
+		</div>
+		<div class="scallop-tile-bottom"></div>
+		<div class="scallop-tile-top"></div>
+	  </div>
+    </section>
+    <section id="profile-content">
+		<div id="accountBalances">
+			<div id="goldBalance">Gold Balance</div>
+			<div id="tokenBalance">Token Balance</div>
+			<div id="citizenLevel">Citizen (Lvl. 5)</div>
+			<div id="loyaltyInfo">TBD</div>
+		</div>
+		<h2 id="welcomeHeading">Welcome back!</h2><br>
+		<div id="widgetGrid">
+			<x-widget id="pet" src="includes/widgets/pet/" height="356px" width="240px"></x-widget>
+		</div>
+		<h2>Featured Spaces (TODO: hook into API)</h2>
+			<div id="featured-grid">
+				<div id="featured-1" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_featured_towncenter.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-2" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_beachparty.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-3" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_featured_theisland.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-4" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_featured_thezoo.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>
+				<div id="featured-5" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_featured_cueclub.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-6" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_easterisland.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-7" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_featured_surfbeach.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>				
+				<div id="featured-8" class="space-grid space-grid-item">
+					<img class="space-icon no-interact" src="https://media.smallworlds.app/images/space/icon_fantasybill.png">
+					<div class="space-name">Space Name</div>
+					<button class="space-btn">Visit Space</button>
+				</div>
+			</div>
+			
+				
+    </section>
+  </main>
+  <script>
+	setTimeout(function(){
+		if(document.getElementById('character-name').innerHTML == "John SmallWorlds"){
+			console.log("Homepage in error state. Invalidate session.");
+			handleLogout();
+		}
+	},12000);
+  </script>
+  <script>
+
+  
+	let account_id;
+	let account_sex;
+	let sw_content;
+  	const avatarbgs = ["web/background-avatar-zoo.png","web/background-avatar-towncenter.png","web/background-avatar-easterisland.png"];
+	window.onload = function(){
+		var randomavatarbg = "https://media.smallworlds.app/"+avatarbgs[Math.floor(Math.random()*3)];
+		document.getElementById("character-carousel").setAttribute("style","background:white url('"+randomavatarbg+"') bottom center;background-size:cover;");
+		
+		loadAPIElements();
+	}
+	
+	// Load API information onto the page.
+	async function loadAPIElements(){
+	// Load user's account and avatar information.
+		await getAPIresponse('me'); // Beefy call. Reports current avatar, account info, balances, etc.
+		let my_info = response_data;
+		document.getElementById('goldBalance').innerHTML = my_info.goldBalance.toLocaleString("en-US"); // Display Gold balance
+		document.getElementById('tokenBalance').innerHTML = my_info.tokensBalance.toLocaleString("en-US"); // Display Token balance
+		document.getElementById('loyaltyInfo').innerHTML = my_info.citizenTitle+' (Lvl. '+my_info.citizenLevel+')'; // Display Citizen Title and Level
+		document.getElementById('welcomeHeading').innerHTML = 'Welcome back, '+my_info.firstName+' '+my_info.lastName+'!'; // Display Welcome with Accoutn Owner Name
+		account_id = my_info.id; // Account ID. Save for later. 
+		account_sex = my_info.sex; // Account sex. Save for later.
+		sw_content = my_info.contentPath; // Content path for imagry. We'll use this later too.
+		
+		// Get information on Default Avatar and number of avatars.
+		let avatar_count = my_info.activeAvatars.length;
+		document.getElementById('character-count').innerHTML = 'Avatar '+'x'+' of '+avatar_count; // Display Welcome with Accoutn Owner Name
+		document.getElementById('character-name').innerHTML = my_info.defaultAvatar.fullName; // Display Default Avatar name on load
+		document.getElementById('avatar').src = my_info.defaultAvatar.snapUrl; // Display Default Avatar image on load
+		
+		// Change page title to reflect default avatar's name.
+		// document.getElementByTag('title').innerHTML = my_info.defaultAvatar.fullName;	
+		
+		// Set pet image and info if it exists.
+		if(my_info.defaultAvatar.pet.status){
+			if(my_info.defaultAvatar.takePet){ document.getElementById('avatar-pet').src = my_info.defaultAvatar.pet.snapUrl; }
+		
+		// Get avatar pet data.
+		await getAPIresponse('avatars/pets/'+my_info.defaultAvatar.id+"/");
+		let my_pet_info = response_data;
+		
+		
+		
+		
+	// Find world and server status
+		// Get and display server status.
+		await getAPIresponse('world/online');
+		
+		if(response_data.online == true){ document.getElementById("clockStatus").className = "clock-status status-online";}
+		else{ document.getElementById("clockStatus").className = "clock-status status-offline";}
+		
+		// Every 5 minutes check server status.
+		setInterval(function(){ 
+			getAPIresponse('world/online');
+			if(response_data.online == true){ document.getElementById("clockStatus").className = "clock-status status-online"; }
+			else{ document.getElementById("clockStatus").className = "clock-status status-offline"; }
+	
+		}, 3000000);
+		
+		//Get and display number of users online
+		await getAPIresponse('avatar/findtotalonline');
+		document.getElementById("clockPlayers").innerHTML = response_data[0]+" Online Now";
+		// Every 1 minute check update online user count.
+		setInterval( async function(){ 
+			getAPIresponse('avatar/findtotalonline');
+			document.getElementById("clockPlayers").innerHTML = response_data[0]+" Online Now";
+			if(response_data == "undefined"){ document.getElementById("clockPlayers").innerHTML = ""; }
+		}, 600000);
+		
+		// Get and display current SmallWorlds Time (SWT)
+		await getAPIresponse('space/time');
+		
+		// Get SWT and set clock to current hour and minute.
+		document.getElementById('clockHour').innerHTML = response_data.hours;
+		document.getElementById('clockMinute').innerHTML = response_data.minutes;
+		
+		// Every 60 seconds update the clock with the latest time.
+		setInterval( async function(){ 
+			getAPIresponse('space/time');
+			document.getElementById('clockHour').innerHTML = response_data.hours;
+			document.getElementById('clockMinute').innerHTML = response_data.minutes;
+		}, 60000);
+	}
+  </script>
+  <script src="includes/HTMLElement/widget.js"></script>
+</body>
+</html>
