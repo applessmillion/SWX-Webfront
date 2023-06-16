@@ -4,13 +4,9 @@
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 	<link rel="stylesheet" href="./includes/main.css">
 	<style>
-	body, html{
-		padding:0!important;
-		margin:0!important;
-	}
 	#petContainer{
 		position:relative;
-		background: radial-gradient(circle, rgba(63,251,244,1) 0%, rgba(70,203,252,1) 100%);
+		background: radial-gradient(circle, var(--widget-color-blue) 0%, var(--widget-color-blue-alt) 100%);
 		background-color:lightblue;
 		border-radius:18px;
 		border:3px teal solid;
@@ -19,31 +15,13 @@
 		overflow:hidden;
 	}
 	
-	#bottomUI{
-		position:absolute;
-		bottom:0;
-		left:0;
-		height:86px;
-		width:100%;
-		background-color:#efefff;
-		box-shadow:0px 0px 10px 4px #00000030;
-		padding:15px 6px 24px 6px;
-		z-index:3;
-	}
 	#bottomUI .care-btn{
 		height:42px;
 		width:42px;
 		background-size:contain;
 		background-repeat:no-repeat;
 	}
-	#careButtons{
-		display:flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-around;
-		align-items: center;
-		cursor: pointer;
-	}
+
 	#UIPatBtn{ background: url('includes/images/ui_btn_pat.png') center center; }
 	#UIFoodBtn{ background: url('includes/images/ui_btn_feed.png') center center; }
 	#UICleanBtn{ background: url('includes/images/ui_btn_clean.png') center center; }
@@ -54,35 +32,11 @@
 		flex-direction:row;
 	}
 	
-	.pet-progress-bar{
-		margin:3px 20px 3px 5px;
-		border:2.5px white solid;
-		border-radius:10px;
-		height:8px;
-		background:#cdcddc;
-		width:100%;
-		box-shadow:inset 1px 2px 1px 0px rgba(35,35,35,0.1);
-		overflow:hidden;
-	}
-	
 	.progress-layout img{
-	height:20px;
-	width:20px;
-	margin:0.5px 0px;
+		height:20px;
+		width:20px;
+		margin:0.5px 0px;
 	
-	}
-	
-	#topUI{
-		position:absolute;
-		display:flex;
-		flex-direction:row;
-		top:0;
-		left:0;
-		height:60px;
-		width:100%;
-		box-shadow:0px 6px 6px 0px #00000030 inset;
-		padding:10px;
-		z-index:3;
 	}
 	
 	#petRibbon{
@@ -141,15 +95,6 @@
 		transition-property:opacity;
 		opacity:0;
 	}
-	
-	.progress-bar-fill{
-		height:100%;
-		width:33%;
-		background-color:#00d200;
-		transition-duration:1s;
-		transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
-		box-shadow: inset 2px 2px 3px 0px #ffffff79;
-	}
 	</style>
 </head>
 
@@ -181,19 +126,19 @@
 			<div id="careProgress">
 				<div class="progress-layout">
 					<img src="includes/images/ui_icon_happiness.png" alt="Pet Happiness">
-					<div id="barHappiness" class="pet-progress-bar">
+					<div id="barHappiness" class="progress-bar">
 						<div id="barHappinessFill" class="progress-bar-fill"></div>
 					</div>
 				</div>
 				<div class="progress-layout">
 					<img src="includes/images/ui_icon_health.png" alt="Pet Health">
-					<div id="barHealth" class="pet-progress-bar">
+					<div id="barHealth" class="progress-bar">
 						<div id="barHealthFill" class="progress-bar-fill"></div>
 					</div>
 				</div>
 				<div class="progress-layout">
 					<img src="includes/images/ui_icon_hygiene.png" alt="Pet Cleanliness">
-					<div id="barHygiene" class="pet-progress-bar">
+					<div id="barHygiene" class="progress-bar">
 						<div id="barHygieneFill" class="progress-bar-fill"></div>
 					</div>
 				</div>
