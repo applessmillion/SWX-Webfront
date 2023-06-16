@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-	<link rel="stylesheet" href="./includes/main.css">
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="../common/common.css">
 	<style>
 	#petContainer{
 		position:relative;
@@ -22,10 +23,10 @@
 		background-repeat:no-repeat;
 	}
 
-	#UIPatBtn{ background: url('includes/images/ui_btn_pat.png') center center; }
-	#UIFoodBtn{ background: url('includes/images/ui_btn_feed.png') center center; }
-	#UICleanBtn{ background: url('includes/images/ui_btn_clean.png') center center; }
-	#UIShopBtn{ background: url('includes/images/ui_btn_buy.png') center center; }
+	#UIPatBtn{ background: url('images/ui_btn_pat.png') center center; }
+	#UIFoodBtn{ background: url('images/ui_btn_feed.png') center center; }
+	#UICleanBtn{ background: url('images/ui_btn_clean.png') center center; }
+	#UIShopBtn{ background: url('images/ui_btn_buy.png') center center; }
 	
 	.progress-layout{
 		display:flex;
@@ -40,7 +41,7 @@
 	}
 	
 	#petRibbon{
-		background: url('includes/images/ribbon_large.png') center center;
+		background: url('images/ribbon_large.png') center center;
 		background-size:contain;
 		background-repeat:no-repeat;
 		width:40px;
@@ -70,7 +71,7 @@
 	}
 	
 	#petAssembly .pet-head{
-		background: url('includes/images/demo/pet.png') 0px 0px;
+		background: url('images/demo/pet.png') 0px 0px;
 		background-repeat:no-repeat;
 		width:64px;
 		height:64px;
@@ -125,19 +126,19 @@
 			</div>
 			<div id="careProgress">
 				<div class="progress-layout">
-					<img src="includes/images/ui_icon_happiness.png" alt="Pet Happiness">
+					<img src="images/ui_icon_happiness.png" alt="Pet Happiness">
 					<div id="barHappiness" class="progress-bar">
 						<div id="barHappinessFill" class="progress-bar-fill"></div>
 					</div>
 				</div>
 				<div class="progress-layout">
-					<img src="includes/images/ui_icon_health.png" alt="Pet Health">
+					<img src="images/ui_icon_health.png" alt="Pet Health">
 					<div id="barHealth" class="progress-bar">
 						<div id="barHealthFill" class="progress-bar-fill"></div>
 					</div>
 				</div>
 				<div class="progress-layout">
-					<img src="includes/images/ui_icon_hygiene.png" alt="Pet Cleanliness">
+					<img src="images/ui_icon_hygiene.png" alt="Pet Cleanliness">
 					<div id="barHygiene" class="progress-bar">
 						<div id="barHygieneFill" class="progress-bar-fill"></div>
 					</div>
@@ -147,8 +148,10 @@
 		</div>
 	
 	</div>
-<script type="text/javascript" src="includes/petCare.js"></script>
-<script type="text/javascript" src="includes/petAnimation.js"></script>
+<script type="text/javascript" src="petCare.js"></script>
+<script type="text/javascript" src="petAnimation.js"></script>
+<script type="text/javascript" src="../common/common.js"></script>
+<script type="text/javascript" src="../common/api.js"></script>
 <script>
 	// ----- ONLOAD FUNCTIONS
 	handlePetIdleAnimation(); // Put pet into an idle formation.
