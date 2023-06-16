@@ -5,15 +5,8 @@
 	<link rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="../widget.css">
 	<style>
-	#petContainer{
-		position:relative;
-		background: radial-gradient(circle, var(--widget-color-blue) 0%, var(--widget-color-blue-alt) 100%);
-		background-color:lightblue;
-		border-radius:18px;
-		border:3px teal solid;
-		height:350px;
-		width:230px;
-		overflow:hidden;
+	#petWidget{
+
 	}
 	
 	#bottomUI .care-btn{
@@ -108,8 +101,8 @@
 </head>
 
 <body>
-	<div id="petContainer">
-		<div id="loadingContainer"></div>
+	<div id="petWidget" class="widget-box">
+		<div id="loadingOverlay" class="widget-overlay"></div>
 		<div id="petNew"></div>
 		<div id="topUI" class="widget-ui">
 			<div id="petRibbon">
@@ -158,14 +151,17 @@
 		</div>
 	
 	</div>
-<script type="text/javascript" src="petCare.js"></script>
-<script type="text/javascript" src="petAnimation.js"></script>
 <script type="text/javascript" src="../widget.js"></script>
 <script type="text/javascript" src="../../api.js"></script>
+<script type="text/javascript" src="petApi.js"></script>
+<script type="text/javascript" src="petCare.js"></script>
+<script type="text/javascript" src="petAnimation.js"></script>
 <script>
 	// ----- ONLOAD FUNCTIONS
 	handlePetIdleAnimation(); // Put pet into an idle formation.
 	petUpdateCareBars(); // Set our care status bars.
+	
+	apiConnectPet();
 </script>
 </body>
 
