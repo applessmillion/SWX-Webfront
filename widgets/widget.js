@@ -8,8 +8,16 @@
 * Last Edited: 6/15/23
 */
 
-function widgetOnAPILoad(){
+function widgetOnAPILoad(api_is_loaded){
+	// Remove loading spinner
+	document.getElementById("loadingSpinner").display = "none";
+	if(api_is_loaded){
+		// Fade out loading background and spinner.
+		setTimeout(function(){ document.getElementById("loadingOverlay").className = "widget-overlay widget-overlay-dismissed" },1000);
+	}else{
+		// on API load error, show error.
+		document.getElementById("loadingOverlay").innerHTML = "SmallWorlds encountered an error. Please try again later.";
+	}
 	
-	document.getElementById("loadingOverlay").className = "widget-overlay widget-overlay-dismissed";
 	
 }
