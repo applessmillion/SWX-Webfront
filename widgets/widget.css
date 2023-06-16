@@ -1,34 +1,33 @@
-root:{
+:root{
 	--widget-color-blue:rgb(63,251,244);
 	--widget-color-blue-alt:rgb(70,203,252);
-
+	--widget-color-ui:#efefff;
+	--widget-color-progress-bg:#cdcddc;
+	--widget-color-progress-fill:#00d200;
+	--widget-color-progress-fill-alt:##ffffff79;
 }
-
 body, html{
 	padding:0!important;
 	margin:0!important;
 }
-
-#topUI, bottomUI{
+.widget-ui{
 	position:absolute;
 	left:0;
 	width:100%;
 	z-index:3;
 }
-
 #topUI{
 	display:flex;
 	flex-direction:row;
 	top:0;
 	height:60px;
 	box-shadow:0px 6px 6px 0px #00000030 inset;
-	padding:10px;
+	padding:8px;
 }
-
 #bottomUI{
 	bottom:0;
 	height:86px;
-	background-color:#efefff;
+	background-color:var(--widget-color-ui);
 	box-shadow:0px 0px 10px 4px #00000030;
 	padding:15px 6px 24px 6px;
 }
@@ -44,10 +43,10 @@ body, html{
 
 .progress-bar{
 	margin:3px 20px 3px 5px;
-	border:2.5px white solid;
+	border:2px white solid;
 	border-radius:10px;
 	height:8px;
-	background:#cdcddc;
+	background:var(--widget-color-progress-bg);
 	width:100%;
 	box-shadow:inset 1px 2px 1px 0px rgba(35,35,35,0.1);
 	overflow:hidden;
@@ -56,8 +55,8 @@ body, html{
 .progress-bar-fill{
 	height:100%;
 	width:25%;
-	background-color:#00d200;
+	background-color:var(--widget-color-progress-fill);
 	transition-duration:1s;
 	transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
-	box-shadow: inset 2px 2px 3px 0px #ffffff79;
+	box-shadow: inset 2px 2px 3px 0px var(--widget-color-progress-fill-alt);
 }
