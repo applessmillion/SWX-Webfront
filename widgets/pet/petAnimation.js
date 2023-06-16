@@ -24,7 +24,6 @@ const pet_head_state_back_right = [-192,0,'pet_head_state_back_right'];
 function setPetHead(state){
 	document.getElementById('petHead').style.backgroundPosition = ""+state[0]+"px "+state[1]+"px";
 	pet_headspace = state[2];
-	console.log("Set pet head to "+pet_headspace+" with params: "+state[0]+" "+state[1]+" "+state[2]);
 }
 
 // Set emotion image above pet to a specific image.
@@ -76,30 +75,28 @@ function petAnimationIdle(){
 	}else{ // Reset to front if we get in trouble.
 		setPetHead(pet_head_state_front);
 	}
-	
-	console.log("Animating");
 }
 
 // Display eating animation above pet head for ~3s. 
 function petEmoteEat(){
 	// Load images in immediately with frame 1 still showing.
-	setPetEmotion('./includes/images/emote_eat_3.png');
-	setPetEmotion('./includes/images/emote_eat_2.png');
-	setPetEmotion('./includes/images/emote_eat_1.png');
+	setPetEmotion('./images/emote_eat_3.png');
+	setPetEmotion('./images/emote_eat_2.png');
+	setPetEmotion('./images/emote_eat_1.png');
 	setTimeout( function(){ document.getElementById("petEmoteSpace").style.opacity = "1"}, 10);
 	
 	// Set emote state to true.
 	is_pet_emoting = true;
 	
 	// Begin proper animation with jank setTimeout.
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_2.png') }, 500);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_3.png') }, 1000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_1.png') }, 1500);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_2.png') }, 2000);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_2.png') }, 500);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_3.png') }, 1000);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_1.png') }, 1500);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_2.png') }, 2000);
 	setTimeout( function(){ document.getElementById("petEmoteSpace").style.opacity = "0" }, 2000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_3.png') }, 2500);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_1.png') }, 3000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_eat_2.png') }, 3500);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_3.png') }, 2500);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_1.png') }, 3000);
+	setTimeout( function(){ setPetEmotion('./images/emote_eat_2.png') }, 3500);
 	setTimeout( function(){ is_pet_emoting = false; }, 2100);
 }
 
@@ -107,7 +104,7 @@ function petEmoteEat(){
 // Display happy emote above pet head for 1 second.
 function petEmotePat(){
 	// Load images in immediately with frame 1 still showing.
-	setPetEmotion('./includes/images/emote_happy.png');
+	setPetEmotion('./images/emote_happy.png');
 	document.getElementById("petEmoteSpace").style.opacity = "1";
 	
 	// Set emote state to true.
@@ -118,12 +115,12 @@ function petEmotePat(){
 	setTimeout( function(){ document.getElementById("petEmoteSpace").style.opacity = "0" }, 1000);
 }
 
-// Oh hell no. Whoever made this animation really, really, really needs to get kicked. In flash? this would go really great actually. In JS? hell no. This is going to be a pain in the ass and look uglier than a hairy asshole. But we'll get'r done...
+// Unused
 function petEmoteClean(){
 	// Load images in immediately with frame 1 still showing.
-	setPetEmotion('./includes/images/emote_clean_3.png');
-	setPetEmotion('./includes/images/emote_clean_2.png');
-	setPetEmotion('./includes/images/emote_clean_1.png');
+	setPetEmotion('./images/emote_clean_3.png');
+	setPetEmotion('./images/emote_clean_2.png');
+	setPetEmotion('./images/emote_clean_1.png');
 	document.getElementById("petEmoteSpace").style.opacity = "1";
 	
 	// Set emote state to true.
@@ -132,10 +129,10 @@ function petEmoteClean(){
 	// We need to expand the bounding box of petEmote for this one...
 	document.getElementById("petEmoteSpace").style.height = "70%";
 	// Begin proper animation with jank setTimeout.
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_clean_2.png'), 'contain center center' }, 1000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_clean_3.png'), 'contain center center' }, 2000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_clean_4.png'), 'contain center center' }, 3000);
-	setTimeout( function(){ setPetEmotion('./includes/images/emote_clean_5.png'), 'contain center center' }, 4000);
+	setTimeout( function(){ setPetEmotion('./images/emote_clean_2.png'), 'contain center center' }, 1000);
+	setTimeout( function(){ setPetEmotion('./images/emote_clean_3.png'), 'contain center center' }, 2000);
+	setTimeout( function(){ setPetEmotion('./images/emote_clean_4.png'), 'contain center center' }, 3000);
+	setTimeout( function(){ setPetEmotion('./images/emote_clean_5.png'), 'contain center center' }, 4000);
 	setTimeout( function(){ document.getElementById("petEmoteSpace").style.opacity = "0" }, 1500);
 	setTimeout( function(){ is_pet_emoting = false; }, 1500);
 	setTimeout( function(){ document.getElementById("petEmoteSpace").style.height = ""; }, 3500);
