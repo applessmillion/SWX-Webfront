@@ -42,15 +42,15 @@ function petSwitchCareMode(mode=0){
 	// Trigger when our current mode is no care (0) and we are switching to care mode.
 	if(mode != 0){
 		if(mode == 1){ // Pat/happy mode 
-			document.getElementById('petContainer').className = "cursor-pat-enabled";
+			document.getElementById('petWidget').className = "widget-box cursor-pat-enabled";
 			document.getElementById('petDisplay').addEventListener('mouseover', petIncrementCare);
 		}
 		else if(mode == 2){ // food/health mode 
-			document.getElementById('petContainer').className = "cursor-food-enabled";
+			document.getElementById('petWidget').className = "widget-box cursor-food-enabled";
 			document.getElementById('petAssembly').addEventListener('click', petIncrementCare);
 		}
 		else if(mode == 3){ // Clean/hygiene mode 
-			document.getElementById('petContainer').className = "cursor-clean-enabled";
+			document.getElementById('petWidget').className = "widget-box cursor-clean-enabled";
 			document.getElementById('petDisplay').addEventListener('mouseover', petIncrementCare);
 		}
 	}
@@ -58,7 +58,7 @@ function petSwitchCareMode(mode=0){
 	else if(mode == 0 && careMode != 0){
 		document.getElementById('petDisplay').removeEventListener('mouseover', petIncrementCare);
 		document.getElementById('petAssembly').removeEventListener('click', petIncrementCare);
-		document.getElementById('petContainer').className = ''; // Clear cursor
+		document.getElementById('petWidget').className = 'widget-box'; // Clear cursor
 		
 		// Set time-out for emoting in case emotes still are handling in the background.
 		document.getElementById("petEmoteSpace").style.opacity = "0";

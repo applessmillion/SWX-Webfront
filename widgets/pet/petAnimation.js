@@ -33,7 +33,7 @@ function setPetEmotion(frame_path, args='center center no-repeat'){
 
 // Handle delays through a JS promise.
 function petDelay(x){
-	return new Promise((resolve) => { setTimeout(() => { resolve(x); }, 5000)});
+	return new Promise((resolve) => { setTimeout(() => { resolve(x); }, 4000)});
 }
 
 // Engage the pet in an idle animation every while.
