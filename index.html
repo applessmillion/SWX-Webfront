@@ -43,7 +43,7 @@ header{
 }
 h1,h2,h3,h4{ font-family: font-header, "Helvetica Neue", Helvetica, Arial, sans-serif; margin-bottom:5px;line-height:1.05; }
 main{
-width: clamp(780px,60vw,1260px);
+width: clamp(790px,60vw,1260px);
 display:flex;
 flex-direction:row;
 }
@@ -221,7 +221,7 @@ flex-direction:row;
 }
 
 #avatarPet{
-	margin-left:-156px;
+	margin-left:-33%;
 	opacity:1;
 	transition:1s;
 	height:128px;
@@ -326,6 +326,7 @@ flex-direction:row;
 		<h2 id="welcomeHeading">Welcome back!</h2><br>
 		<div id="widgetGrid">
 			<x-widget id="pet" src="widgets/pet/index.html" height="356px" width="240px"></x-widget>
+			<x-widget id="plant" src="widgets/plant/index.html" height="356px" width="240px"></x-widget>
 		</div>
 		<h2>Featured Spaces (TODO: hook into API)</h2>
 			<div id="featured-grid">
