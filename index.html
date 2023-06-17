@@ -312,7 +312,7 @@ flex-direction:row;
 		</div>
 		<h2 id="welcomeHeading">Welcome back!</h2><br>
 		<div id="widgetGrid">
-			<x-widget id="pet" src="includes/widgets/pet/" height="356px" width="240px"></x-widget>
+			<x-widget id="pet" src="widgets/pet/index.html" height="356px" width="240px"></x-widget>
 		</div>
 		<h2>Featured Spaces (TODO: hook into API)</h2>
 			<div id="featured-grid">
@@ -408,9 +408,10 @@ flex-direction:row;
 		// Set pet image and info if it exists.
 		if(my_info.defaultAvatar.pet.status){
 			if(my_info.defaultAvatar.takePet){ document.getElementById('avatar-pet').src = my_info.defaultAvatar.pet.snapUrl; }
+			}
 		
 		// Get avatar pet data.
-		await getAPIresponse('avatars/pets/'+my_info.defaultAvatar.id+"/");
+		await getAPIresponse('avatar/pet/'+my_info.defaultAvatar.id+"/");
 		let my_pet_info = response_data;
 		
 		
@@ -456,6 +457,6 @@ flex-direction:row;
 		}, 60000);
 	}
   </script>
-  <script src="includes/HTMLElement/widget.js"></script>
+  <script src="HTMLElement/widget.js"></script>
 </body>
 </html>
