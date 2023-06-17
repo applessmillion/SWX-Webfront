@@ -84,6 +84,7 @@ flex-direction:row;
 	justify-content: space-evenly;
 	border:1px solid var(--border-base);
 	border-top:0px;
+	align-items:baseline;
 }
 
 #character-options-buttons{
@@ -215,6 +216,18 @@ flex-direction:row;
 	font-weight:600;
 }
 
+#avatar{
+	margin-right:-32px;
+}
+
+#avatarPet{
+	margin-left:-156px;
+	opacity:1;
+	transition:1s;
+	height:128px;
+	width:128px;
+}
+
 .clock-display{
 	flex-direction:row;
 	justify-content:space-between;
@@ -289,7 +302,7 @@ flex-direction:row;
 		</div>
 		<div id="character-carousel" class="carousel slide">
 			<img id="avatar" src="https://avatars.smallworlds.app/avatar_sillhoutte.png" class="no-interact">
-			<img id="avatar-pet" src="" class="no-interact">
+			<img id="avatarPet" src="" class="no-interact">
 		</div>
 		<div id="character-options">
 			<button class="space-btn btn-enter-world">ENTER WORLD</button>
@@ -371,7 +384,8 @@ flex-direction:row;
   </script>
   <script>
 
-  
+	let pet_images;
+	let my_info;
 	let account_id;
 	let account_sex;
 	let sw_content;
@@ -387,7 +401,7 @@ flex-direction:row;
 	async function loadAPIElements(){
 	// Load user's account and avatar information.
 		await getAPIresponse('me'); // Beefy call. Reports current avatar, account info, balances, etc.
-		let my_info = response_data;
+		my_info = response_data;
 		document.getElementById('goldBalance').innerHTML = my_info.goldBalance.toLocaleString("en-US"); // Display Gold balance
 		document.getElementById('tokenBalance').innerHTML = my_info.tokensBalance.toLocaleString("en-US"); // Display Token balance
 		document.getElementById('loyaltyInfo').innerHTML = my_info.citizenTitle+' (Lvl. '+my_info.citizenLevel+')'; // Display Citizen Title and Level
@@ -406,14 +420,27 @@ flex-direction:row;
 		// document.getElementByTag('title').innerHTML = my_info.defaultAvatar.fullName;	
 		
 		// Set pet image and info if it exists.
-		if(my_info.defaultAvatar.pet.status){
-			if(my_info.defaultAvatar.takePet){ document.getElementById('avatar-pet').src = my_info.defaultAvatar.pet.snapUrl; }
-			}
+
 		
 		// Get avatar pet data.
-		await getAPIresponse('avatar/pet/'+my_info.defaultAvatar.id+"/");
-		let my_pet_info = response_data;
 		
+		await getAPIresponse('avatar/pet/'+my_info.defaultAvatar.id);
+		widget_pet_data = response_data; // Store pet data in pet widget.
+		let update_on_load = false; // Should we return data via POST upon completing the readout of the recieved data?
+		
+		// This is going to look funny but I bet 99% of the time it will work.
+		// Determine if our pet images need to be updated in the db.
+		if(widget_pet_data.snapshot.length <= 55){
+			// snapshot image is bad. Rebuild them.
+			//This, much like the selector for current avatar, will need to change later.
+			await petBuildImages(my_info.defaultAvatar.id);
+			update_on_load = true; // Send data back with fixes to images.
+		}else{
+			// if snapshot image is good, get images and put them into an array. Format like this: [snapshot, thumbnail, head]
+			pet_images = [widget_pet_data.snapshot,widget_pet_data.thumbnail,widget_pet_data.head];
+		}
+		
+		document.getElementById('avatarPet').src = pet_images[0]; // Display avatar snapshot pet on load.
 		
 		
 		
@@ -458,6 +485,23 @@ flex-direction:row;
 			document.getElementById('clockHour').innerHTML = response_data.hours;
 			document.getElementById('clockMinute').innerHTML = response_data.minutes;
 		}, 60000);
+	}
+	
+	// --- NOTE: this eventually needs to get placed into our petApi.js file. Cleanup with this block cleanup.
+	// Help build a url for a specified pet image.
+	async function petBuildImages(avatarId){
+			await getAPIresponse('avatar/pet/'+avatarId);
+			let pet_data = response_data;
+			// Merge db data - stringId+headPostfix
+			pet_pic_string = pet_data.stringid+pet_data.postfix;
+			// Build links to pet images
+			let pet_snapshot = 'https://avatars.smallworlds.app/'+pet_pic_string+'_snap.png';
+			let pet_thumbnail = 'https://avatars.smallworlds.app/'+pet_pic_string+'_thumb.png';
+			let pet_head = 'https://avatars.smallworlds.app/'+pet_pic_string+'.png';
+			
+			// Build the array to return.
+			pet_images = [pet_snapshot,pet_thumbnail,pet_head];
+			return pet_images;	
 	}
   </script>
   <script src="HTMLElement/widget.js"></script>

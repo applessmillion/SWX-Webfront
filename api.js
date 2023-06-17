@@ -12,6 +12,10 @@ var response_data; 	// Basic variable to store API response.
 var has_api_loaded = true; // Report if our initAPI() function has run and loaded.
 var has_api_online; // Report status of API endpoint based on initAPI() fetch.
 var has_been_warned; // Has the console been told the API is down (if it is)?
+var api_user_info; // Declare account information in this document for use across all API-dependant files.
+var api_endpoints_loaded = []; // Track endpoints that get loaded per page.
+var api_modules_loaded = []; // Track modules/widgets that get loaded.
+
 initAPI(); // Test for API connectivity.
 
 
@@ -20,24 +24,28 @@ async function initAPI(callbackFunction=null){
 	let apiTimeout = 1500; // 1.5 seconds
 	const timeoutId = setTimeout(() => {controller.abort();}, apiTimeout); // Start 3s timeout
 	
-	// Test the API & world status and wait for a response <= apiTimeout
-	await fetch(swAPIURL+'world/online', { signal: controller.signal,})
-		.then(response => {
-			has_api_online = true;
-		})
-		.catch(error => {
-			if(error.name === 'AbortError'){
-				// Error due to timeout on API request.
-				if(!has_been_warned){ console.log("API offline."); }
-				
-				// Dismiss further warnings
-				has_been_warned = true;
-			}else{
-				// Error due to some other reason.
-				console.log("Recieved response, but it was unexpected.");
-			}
-			has_api_online = false;
-		});
+	// If our API connection has already been successful, skip the check and run the callback function exclusively.
+	if(has_api_online != true){
+		// Test the API & world status and wait for a response <= apiTimeout
+		await fetch(swAPIURL+'me', { signal: controller.signal,})
+			.then(response => {
+				has_api_online = true;
+				api_user_info = response;
+			})
+			.catch(error => {
+				if(error.name === 'AbortError'){
+					// Error due to timeout on API request.
+					if(!has_been_warned){ console.log("API offline."); }
+					
+					// Dismiss further warnings
+					has_been_warned = true;
+				}else{
+					// Error due to some other reason.
+					console.log("Recieved response, but it was unexpected.");
+				}
+				has_api_online = false;
+			});
+	}
 	
 	// If this API is being called to activate something, trigger the function passed to us.
 	if(callbackFunction){ callbackFunction(); }
@@ -55,6 +63,14 @@ async function getAPIresponse(endpoint){
 	  .then(response => response.json()) // Extract JSON data from the response
 	  .then(data => {
 		response_data = data;
+		
+		// If the API endpoint has not been logged yet set up a keypair in the array.
+		if(!api_endpoints_loaded[endpoint]){
+			api_endpoints_loaded.push({endpoint:0});
+		}
+		// Increment number in api_endpoints_loaded for respective endpoint
+		api_endpoints_loaded[endpoint] += 1;
+		
 		return response_data; // Store the data in our variable
 	})
 		.catch(error => {
@@ -64,26 +80,14 @@ async function getAPIresponse(endpoint){
 	});
 }
 
-async function sendAPIresponse(endpoint, post_data=''){
+// Send POST data to an API endpoint 
+async function sendAPIresponse(endpoint, post_data){
 	// If this page has unsuccessfully loaded, respond like this.
 	if(!has_api_loaded) { console.log("API is not loaded. How are you running this?"); initAPI(); }
 	// If our API is not online, do not try to process requests.
-	if(!has_api_online) { console.log("API is offline. API requests will not be processed. Please refresh the page to try again."); return null; }
+	if(!has_api_online && !has_been_warned) { console.log("API is offline. API requests will not be processed. Please refresh the page to try again."); return null; }
 	
-	await fetch(swAPIURL+endpoint)
-	  .then(response => response.json()) // Extract JSON data from the response
-	  .then(data => {
-		response_data = data;
-		return response_data; // Store the data in our variable
-	})
-		.catch(error => {
-		console.log('Error:', error);
-		//handleLogout(); // We do not want to do this during testing.
-
-	});
 	
-	// Run function from widgets/common/common.js to send status of API.
-	apiLoadingComplete();
 }
 
 function handleLogout(){

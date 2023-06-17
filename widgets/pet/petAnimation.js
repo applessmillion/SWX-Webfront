@@ -52,7 +52,6 @@ async function handlePetIdleAnimation(){
 // We'll get a little random with it...
 function petAnimationIdle(){
 	let pet_state_randomization = Math.ceil(Math.random()*4);
-	
 	if(pet_headspace == 'pet_head_state_front'){
 		if(pet_state_randomization == 1){ setPetHead(pet_head_state_front_left); }
 		else if(pet_state_randomization == 2){ setPetHead(pet_head_state_front_right); }

@@ -110,6 +110,7 @@
 			</div>
 			<div>
 				<h2 id="petName">Rufus</h2>
+				<h3 id="petMotto">Rufus</h3>
 			</div>
 		</div>
 		<div id="petDisplay">
@@ -160,6 +161,8 @@
 	// ----- ONLOAD FUNCTIONS
 	handlePetIdleAnimation(); // Put pet into an idle formation.
 	petUpdateCareBars(); // Set our care status bars.
+	
+	let widget_pet_data; // We will store our pet's data in this variable upon load.
 	
 	apiConnectPet();
 </script>
