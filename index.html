@@ -435,12 +435,12 @@ flex-direction:row;
 		//Get and display number of users online
 		await getAPIresponse('avatar/findtotalonline');
 		document.getElementById("clockPlayers").innerHTML = response_data[0]+" Online Now";
-		// Every 1 minute check update online user count.
+		// Every 3 minute check update online user count.
 		setInterval( async function(){ 
 			getAPIresponse('avatar/findtotalonline');
 			document.getElementById("clockPlayers").innerHTML = response_data[0]+" Online Now";
 			if(response_data == "undefined"){ document.getElementById("clockPlayers").innerHTML = ""; }
-		}, 600000);
+		}, 180000);
 		
 		// Get and display current SmallWorlds Time (SWT)
 		await getAPIresponse('space/time');
@@ -450,6 +450,9 @@ flex-direction:row;
 		document.getElementById('clockMinute').innerHTML = response_data.minutes;
 		
 		// Every 60 seconds update the clock with the latest time.
+		// ----- NOTE: This should be reprogrammed to utilize a JS clock-like function.
+		// I will need to pass a new var, clockSeconds, from the API to be percise as possible.
+		// Without seconds we can be <59s off at any given time.
 		setInterval( async function(){ 
 			getAPIresponse('space/time');
 			document.getElementById('clockHour').innerHTML = response_data.hours;
