@@ -23,7 +23,7 @@ async function apiConnectPet(){
 	
 	// Test of API is online and accessible
 	if(typeof has_api_online === 'undefined' || !has_api_online){
-		while(api_retries < 5){
+		while(api_retries < 3){
 			initAPI(apiConnectPet);
 			console.log("Trying to reconnect to API ("+api_retries+")...");
 			api_retries++;

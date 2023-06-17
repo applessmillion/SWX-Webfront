@@ -8,10 +8,10 @@
 * Last Edited: 6/15/23
 */
 
-function widgetOnAPILoad(api_is_loaded){
+function widgetOnAPILoad(){
 	// Remove loading spinner
 	document.getElementById("loadingSpinner").display = "none";
-	if(api_is_loaded){
+	if(has_api_online){
 		// Fade out loading background and spinner.
 		setTimeout(function(){ document.getElementById("loadingOverlay").className = "widget-overlay widget-overlay-dismissed" },1000);
 	}else{
