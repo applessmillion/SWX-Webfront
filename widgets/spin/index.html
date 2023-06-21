@@ -5,150 +5,250 @@
 	<link rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="../widget.css">
 	<style>
-	#petWidget{
+	
+	@keyframes wheel-rotate {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	
+	@keyframes wheel-rotate-alt {
+		from {
+			transform: rotate(360deg);
+		}
+		to {
+			transform: rotate(0deg);
+		}
+	}
+
+	#s2wWidget{
 
 	}
-	
-	#bottomUI .care-btn{
-		height:42px;
-		width:42px;
-		background-size:contain;
-		background-repeat:no-repeat;
-	}
 
-	#UIPatBtn{ background: url('images/ui_btn_pat.png') center center; }
-	#UIFoodBtn{ background: url('images/ui_btn_feed.png') center center; }
-	#UICleanBtn{ background: url('images/ui_btn_clean.png') center center; }
-	#UIShopBtn{ background: url('images/ui_btn_buy.png') center center; }
 	
-	.progress-layout{
-		display:flex;
-		flex-direction:row;
-	}
-	
-	.progress-layout img{
-		height:20px;
-		width:20px;
-		margin:0.5px 0px;
-	
-	}
-	
-	#petRibbon{
-		background: url('images/ribbon_large.png') center center;
-		background-size:contain;
-		background-repeat:no-repeat;
-		width:40px;
-		height:60px;
-	}
-	#petRibbon p{
-		text-align:center;
-		font-size:15px;
-		font-weight:900;
-		padding-top:12px;
-		margin:auto;
-		text-shadow:0px 1px 1px teal, 1px 0px 1px teal, 0px -1px 1px teal, -1px 0px 1px teal;
-		color:white;
-	}
-	#petName{
-		color:white;
-		text-transform:uppercase;
-		padding-left:5%;
-		font:400 15px Helvetica,Arial,sans-serif;
-	}
-	#petAssembly{
-		padding:16px;
-		margin:auto;
-		margin-top:35%;
-		width:100px;
-		height:100px;
-	}
-	
-	#petAssembly .pet-head{
-		background: url('images/demo/pet.png') 0px 0px;
-		background-repeat:no-repeat;
-		width:64px;
-		height:64px;
-		margin:auto;
-	}
-	
-	#petDisplay{
-		height:70%;
+	#s2wDisplay{
+		height:100%;
 		width:100%;
 		z-index:0;
 		position:absolute;
+		display:flex;
+		flex-direction:row;
+		flex-wrap:none;
+		justify-content:space-between;
+		align-items:center;
 		top:0;
 	}
 	
-	#petEmoteSpace{
-		position:absolute;
-		top:25%;
-		height:25%;
-		width:100%;
-		z-index:1;
-		transition:1.5s;
-		transition-property:opacity;
-		opacity:0;
+	.s2w-bottom{
+		transition:1.25s;
+		bottom:0;
 	}
 	
-	#petNew{
-		z-index:-1;
-		position:absolute;
-		height:100%;
-		width:100%
-		opacity:0;
+	.s2w-bottom-closed{
+		bottom:-100px!important;
 	}
+	
+	#topUI{
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	
+	#wheelTileBasic, #wheelTileDeluxe{
+		width:50%;
+		display:flex;
+		flex-direction:column;
+		align-items:center;
+	}
+	
+	.s2w-wheel-basic-hover .wheel-element{
+		left:-125%;
+		animation:wheel-rotate 90s linear infinite;
+	}
+	
+	.s2w-wheel-deluxe-hover .wheel-element{
+		right:-125%;
+		animation:wheel-rotate-alt 90s linear infinite;
+
+	}
+
+	.s2w-wheel-deluxe-hover .wheel-element .wheel-slice p,.s2w-wheel-deluxe-hover .wheel-element .wheel-slice2 p{
+		-moz-transform: scale(-1, -1);
+		-webkit-transform: scale(-1, -1);
+		-o-transform: scale(-1, -1);
+		-ms-transform: scale(-1, -1);
+		transform: scale(-1, -1);
+	
+	}
+	
+	.wheel-element{
+	height:800px;
+	width:800px;
+	background: url('./images/wheel_base.png') no-repeat;
+	background-size:cover;
+	border:10px white solid;
+	box-shadow: inset 0px 0px 5px black;
+	position:relative;
+	border-radius:50%;
+	overflow:hidden;
+	
+	}
+	
+	.wheel-slice {
+	height: 10%;
+    width: 100%;
+    background: url(./images/wheel-slice/trick-alt.png) no-repeat;
+    position: absolute;
+    background-size: contain;
+	top:45%;
+	right:0;
+	align-items: center;
+    display: flex;
+    justify-content: flex-end;
+	}
+	
+	.wheel-slice2 {
+	height: 10%;
+    width: 100%;
+    background: url(./images/wheel-slice/trick.png) no-repeat;
+    position: absolute;
+    background-size: contain;
+	top:45%;
+	right:0;
+	align-items: center;
+    display: flex;
+    justify-content: flex-end;
+	}
+
+	.wheel-slice p,.wheel-slice2 p{
+		text-align:right;
+		padding:9px;
+		font-weight:900;
+		font-size:16px;
+	}
+	
+	.wheel-slice-1{ rotate:11.25deg}
+	.wheel-slice-2{ rotate:22.5deg;}
+	.wheel-slice-3{ rotate:33.75deg}
+	.wheel-slice-4{ rotate:45deg;}
+	.wheel-slice-5{ rotate:56.25deg}
+	.wheel-slice-6{ rotate:67.5deg;}
+	.wheel-slice-7{ rotate:78.75deg}
+	.wheel-slice-8{ rotate:90deg}
+	.wheel-slice-9{ rotate:101.25deg}
+	.wheel-slice-10{ rotate:112.5deg}
+	.wheel-slice-11{ rotate:123.75deg}
+	.wheel-slice-12{ rotate:135deg}
+	.wheel-slice-13{ rotate:146.25deg}
+	.wheel-slice-14{ rotate:157.5deg}
+	.wheel-slice-15{ rotate:168.75deg}
+	.wheel-slice-16{ rotate:180deg}
+	.wheel-slice-17{ rotate:191.25deg}
+	.wheel-slice-18{ rotate:202.5deg}
+	.wheel-slice-19{ rotate:213.75deg}
+	.wheel-slice-20{ rotate:225deg}
+	.wheel-slice-21{ rotate:236.25deg}
+	.wheel-slice-22{ rotate:247.5deg}
+	.wheel-slice-23{ rotate:258.75deg}
+	.wheel-slice-24{ rotate:270deg}
+	.wheel-slice-25{ rotate:281.25deg}
+	.wheel-slice-26{ rotate:292.5deg}
+	.wheel-slice-27{ rotate:303.75deg}
+	.wheel-slice-28{ rotate:315deg}
+	.wheel-slice-29{ rotate:326.25deg}
+	.wheel-slice-30{ rotate:337.5deg}
+	.wheel-slice-31{ rotate:348.75deg}
+	.wheel-slice-32{ rotate:0deg;}
+	
 	</style>
 </head>
 
 <body>
-	<div id="petWidget" class="widget-box widget-l">
-		<div id="loadingOverlay" class="widget-overlay"><img src="../common/loading.gif" id="loadingSpinner"></div>
-		<div id="petNew"></div>
+	<div id="s2wWidget" class="widget-box widget-l">
+		<!-- <div id="loadingOverlay" class="widget-overlay"><img src="../common/loading.gif" id="loadingSpinner"></div> -->
 		<div id="topUI" class="widget-ui">
-			<div id="petRibbon">
-				<p class="ui-text-sm">99</p>
-			</div>
-			<div>
-				<h2 id="petName">Rufus</h2>
-				<h3 id="petMotto">Rufus</h3>
-			</div>
+			<img id="s2wLogo" src="./images/logo_s2w.png">
+			<img id="s2wLogoDeluxe" src="./images/logo_s2w_deluxe.png">
 		</div>
-		<div id="petDisplay">
-			<div id="petEmoteSpace">
-			</div>
-			<div id="petAssembly">
-				<div id="petHead" class="pet-head"></div>
-				<div id="petBody" class="pet-body"></div>
-			</div>
-		</div>
-		<div id="bottomUI" class="widget-ui">
-			<div id="careButtons">
-				<div id="UIPatBtn" class="care-btn"></div>
-				<div id="UIFoodBtn" class="care-btn"></div>
-				<div id="UICleanBtn" class="care-btn"></div>
-				<div id="UIShopBtn" class="care-btn"></div>
-			</div>
-			<div id="careProgress">
-				<div class="progress-layout">
-					<img src="images/ui_icon_happiness.png" alt="Pet Happiness">
-					<div id="barHappiness" class="progress-bar">
-						<div id="barHappinessFill" class="progress-bar-fill"></div>
-					</div>
-				</div>
-				<div class="progress-layout">
-					<img src="images/ui_icon_health.png" alt="Pet Health">
-					<div id="barHealth" class="progress-bar">
-						<div id="barHealthFill" class="progress-bar-fill"></div>
-					</div>
-				</div>
-				<div class="progress-layout">
-					<img src="images/ui_icon_hygiene.png" alt="Pet Cleanliness">
-					<div id="barHygiene" class="progress-bar">
-						<div id="barHygieneFill" class="progress-bar-fill"></div>
-					</div>
+		<div id="s2wDisplay">
+			<div id="wheelTileBasic" class="s2w-wheel-basic-hover">
+				<div class="wheel-element">
+				<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice2" class="wheel-slice2 wheel-slice-2"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice4" class="wheel-slice2 wheel-slice-4"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice6" class="wheel-slice2 wheel-slice-6"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice8" class="wheel-slice2 wheel-slice-8"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice10" class="wheel-slice2 wheel-slice-10"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice12" class="wheel-slice2 wheel-slice-12"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice14" class="wheel-slice2 wheel-slice-14"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice16" class="wheel-slice2 wheel-slice-16"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice18" class="wheel-slice2 wheel-slice-18"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice20" class="wheel-slice2 wheel-slice-20"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice22" class="wheel-slice2 wheel-slice-22"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice24" class="wheel-slice2 wheel-slice-24"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice26" class="wheel-slice2 wheel-slice-26"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice28" class="wheel-slice2 wheel-slice-28"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice30" class="wheel-slice2 wheel-slice-30"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice32" class="wheel-slice2 wheel-slice-32"><p>WHEEL SLICE TITLE</p></div>
 				</div>
 			
 			</div>
+			<div id="wheelTileDeluxe" class="s2w-wheel-deluxe-hover">
+				<div class="wheel-element">
+				<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice2" class="wheel-slice2 wheel-slice-2"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice4" class="wheel-slice2 wheel-slice-4"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice6" class="wheel-slice2 wheel-slice-6"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice8" class="wheel-slice2 wheel-slice-8"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice10" class="wheel-slice2 wheel-slice-10"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice12" class="wheel-slice2 wheel-slice-12"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice14" class="wheel-slice2 wheel-slice-14"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice16" class="wheel-slice2 wheel-slice-16"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice18" class="wheel-slice2 wheel-slice-18"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice20" class="wheel-slice2 wheel-slice-20"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice22" class="wheel-slice2 wheel-slice-22"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice24" class="wheel-slice2 wheel-slice-24"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice26" class="wheel-slice2 wheel-slice-26"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice28" class="wheel-slice2 wheel-slice-28"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice30" class="wheel-slice2 wheel-slice-30"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31"><p>WHEEL SLICE TITLE</p></div>
+				<div id="s2wBasicSlice32" class="wheel-slice2 wheel-slice-32"><p>WHEEL SLICE TITLE</p></div>
+				</div>
+			</div>
+		</div>
+		<div id="bottomUI" class="widget-ui bottom-s s2w-bottom s2w-bottom-closedX">
+
 		</div>
 	
 	</div>
@@ -159,12 +259,10 @@
 <script type="text/javascript" src="petAnimation.js"></script>
 <script>
 	// ----- ONLOAD FUNCTIONS
-	handlePetIdleAnimation(); // Put pet into an idle formation.
-	petUpdateCareBars(); // Set our care status bars.
 	
-	let widget_pet_data; // We will store our pet's data in this variable upon load.
+	let widget_s2w_data; // We will store our s2w data here.
 	
-	apiConnectPet();
+
 </script>
 </body>
 
