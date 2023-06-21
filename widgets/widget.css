@@ -128,6 +128,16 @@ body, html{
 	padding:65% 15px 15px 0px;
 }
 
+.widget-button{
+	border-radius:8px;
+	border:3px teal solid;
+	outline:3px white solid;
+	background-color: var(--widget-color-ui);
+	padding:4px 8px;
+	color:teal;
+	font-weight:600;
+}
+
 @keyframes widgetLoadIn{
   0% {opacity: 1; }
   99% {opacity: .01;}

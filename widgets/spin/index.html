@@ -40,6 +40,7 @@
 		justify-content:space-between;
 		align-items:center;
 		top:0;
+
 	}
 	
 	.s2w-bottom{
@@ -53,7 +54,6 @@
 	
 	#topUI{
 		justify-content: space-between;
-		flex-wrap: wrap;
 	}
 	
 	#wheelTileBasic, #wheelTileDeluxe{
@@ -61,17 +61,17 @@
 		display:flex;
 		flex-direction:column;
 		align-items:center;
+		transition:1s;
 	}
 	
 	.s2w-wheel-basic-hover .wheel-element{
-		left:-125%;
-		animation:wheel-rotate 90s linear infinite;
+		left:-105%;
+		animation:wheel-rotate 110s linear infinite;
 	}
 	
 	.s2w-wheel-deluxe-hover .wheel-element{
-		right:-125%;
-		animation:wheel-rotate-alt 90s linear infinite;
-
+		right:-105%;
+		animation:wheel-rotate-alt 110s linear infinite;
 	}
 
 	.s2w-wheel-deluxe-hover .wheel-element .wheel-slice p,.s2w-wheel-deluxe-hover .wheel-element .wheel-slice2 p{
@@ -84,50 +84,48 @@
 	}
 	
 	.wheel-element{
-	height:800px;
-	width:800px;
-	background: url('./images/wheel_base.png') no-repeat;
-	background-size:cover;
-	border:10px white solid;
-	box-shadow: inset 0px 0px 5px black;
-	position:relative;
-	border-radius:50%;
-	overflow:hidden;
-	
+		height:700px;
+		width:700px;
+		background: url('./images/wheel_base.png') no-repeat;
+		background-size:cover;
+		border:10px white solid;
+		box-shadow:0px 0px 15px #00000075;
+		position:relative;
+		border-radius:50%;
+		overflow:hidden;
+		transition:1s;
 	}
 	
 	.wheel-slice {
-	height: 10%;
-    width: 100%;
-    background: url(./images/wheel-slice/trick-alt.png) no-repeat;
-    position: absolute;
-    background-size: contain;
-	top:45%;
-	right:0;
-	align-items: center;
-    display: flex;
-    justify-content: flex-end;
-	}
-	
-	.wheel-slice2 {
-	height: 10%;
-    width: 100%;
-    background: url(./images/wheel-slice/trick.png) no-repeat;
-    position: absolute;
-    background-size: contain;
-	top:45%;
-	right:0;
-	align-items: center;
-    display: flex;
-    justify-content: flex-end;
+		height: 10%;
+		width: 100%;
+		position: absolute;
+		top:45%;
+		right:0;
+		align-items: center;
+		display: flex;
+		justify-content: flex-end;
 	}
 
-	.wheel-slice p,.wheel-slice2 p{
+	.wheel-slice p{
 		text-align:right;
 		padding:9px;
-		font-weight:900;
+		font-weight:800;
 		font-size:16px;
+		text-shadow:1px 1px grey;
 	}
+	
+	.wheel-slice-unset{ background: url(./images/wheel-slice/base.png) no-repeat; background-size:contain;}
+	.wheel-slice-blue{ background: url(./images/wheel-slice/blue.png) no-repeat; background-size:contain;}
+	.wheel-slice-lightblue{ background: url(./images/wheel-slice/blue-light.png) no-repeat; background-size:contain;}
+	.wheel-slice-purple{ background: url(./images/wheel-slice/purple.png) no-repeat; background-size:contain;}
+	.wheel-slice-green{ background: url(./images/wheel-slice/green.png) no-repeat; background-size:contain;}
+	.wheel-slice-orange{ background: url(./images/wheel-slice/orange.png) no-repeat; background-size:contain;}
+	.wheel-slice-yellow{ background: url(./images/wheel-slice/yellow.png) no-repeat; background-size:contain;}
+	.wheel-slice-rainbow{ background: url(./images/wheel-slice/rainbow.png) no-repeat; background-size:contain;}
+	.wheel-slice-rainbow-alt{ background: url(./images/wheel-slice/rainbow-2.png) no-repeat; background-size:contain;}
+	.wheel-slice-trick{ background: url(./images/wheel-slice/trick.png) no-repeat; background-size:contain;}
+	.wheel-slice-trick-alt{ background: url(./images/wheel-slice/trick-alt.png) no-repeat; background-size:contain;}
 	
 	.wheel-slice-1{ rotate:11.25deg}
 	.wheel-slice-2{ rotate:22.5deg;}
@@ -162,107 +160,167 @@
 	.wheel-slice-31{ rotate:348.75deg}
 	.wheel-slice-32{ rotate:0deg;}
 	
+	.s2w-play-btn-container{
+		position:absolute;
+		top:45%;
+    	width: 100%; /* Failsafe. */
+    	width: -moz-available; /* Chromium. */
+		width: -webkit-fill-available;  /* Firefox. */
+		width: fill-available; /* Hopefully someday... */
+		z-index:5;
+		text-align:center;
+	}
+	
+	.s2wImg{
+		pointer-events:none;
+		width:fit-content;
+		
+	}
+	
 	</style>
 </head>
 
 <body>
 	<div id="s2wWidget" class="widget-box widget-l">
-		<!-- <div id="loadingOverlay" class="widget-overlay"><img src="../common/loading.gif" id="loadingSpinner"></div> -->
+		<div id="loadingOverlay" class="widget-overlay"><img src="../common/loading.gif" id="loadingSpinner"></div>
 		<div id="topUI" class="widget-ui">
-			<img id="s2wLogo" src="./images/logo_s2w.png">
-			<img id="s2wLogoDeluxe" src="./images/logo_s2w_deluxe.png">
+			<img id="s2wLogo" class="s2wImg" src="./images/logo_s2w.png">
+			<img id="s2wLogoDeluxe" class="s2wImg" src="./images/logo_s2w_deluxe.png">
 		</div>
 		<div id="s2wDisplay">
+			<div class="s2w-play-btn-container">
+				
+			</div>
 			<div id="wheelTileBasic" class="s2w-wheel-basic-hover">
 				<div class="wheel-element">
-				<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice2" class="wheel-slice2 wheel-slice-2"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice4" class="wheel-slice2 wheel-slice-4"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice6" class="wheel-slice2 wheel-slice-6"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice8" class="wheel-slice2 wheel-slice-8"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice10" class="wheel-slice2 wheel-slice-10"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice12" class="wheel-slice2 wheel-slice-12"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice14" class="wheel-slice2 wheel-slice-14"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice16" class="wheel-slice2 wheel-slice-16"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice18" class="wheel-slice2 wheel-slice-18"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice20" class="wheel-slice2 wheel-slice-20"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice22" class="wheel-slice2 wheel-slice-22"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice24" class="wheel-slice2 wheel-slice-24"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice26" class="wheel-slice2 wheel-slice-26"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice28" class="wheel-slice2 wheel-slice-28"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice30" class="wheel-slice2 wheel-slice-30"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice32" class="wheel-slice2 wheel-slice-32"><p>WHEEL SLICE TITLE</p></div>
+					<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1 wheel-slice-rainbow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice2" class="wheel-slice wheel-slice-2 wheel-slice-green"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3 wheel-slice-blue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice4" class="wheel-slice wheel-slice-4 wheel-slice-rainbow-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5 wheel-slice-green"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice6" class="wheel-slice wheel-slice-6 wheel-slice-yellow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7 wheel-slice-purple"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice8" class="wheel-slice wheel-slice-8 wheel-slice-blue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9 wheel-slice-yellow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice10" class="wheel-slice wheel-slice-10 wheel-slice-purple"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11 wheel-slice-rainbow-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice12" class="wheel-slice wheel-slice-12 wheel-slice-lightblue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13 wheel-slice-green"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice14" class="wheel-slice wheel-slice-14 wheel-slice-yellow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15 wheel-slice-purple"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice16" class="wheel-slice wheel-slice-16 wheel-slice-green"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17 wheel-slice-rainbow-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice18" class="wheel-slice wheel-slice-18 wheel-slice-orange"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19 wheel-slice-lightblue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice20" class="wheel-slice wheel-slice-20 wheel-slice-yellow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21 wheel-slice-rainbow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice22" class="wheel-slice wheel-slice-22 wheel-slice-purple"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23 wheel-slice-blue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice24" class="wheel-slice wheel-slice-24 wheel-slice-orange"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25 wheel-slice-green"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice26" class="wheel-slice wheel-slice-26 wheel-slice-rainbow-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27 wheel-slice-yellow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice28" class="wheel-slice wheel-slice-28 wheel-slice-orange"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29 wheel-slice-blue"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice30" class="wheel-slice wheel-slice-30 wheel-slice-orange"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31 wheel-slice-rainbow"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice32" class="wheel-slice wheel-slice-32 wheel-slice-yellow"><p>COMING SOON!</p></div>
 				</div>
 			
 			</div>
 			<div id="wheelTileDeluxe" class="s2w-wheel-deluxe-hover">
 				<div class="wheel-element">
-				<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice2" class="wheel-slice2 wheel-slice-2"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice4" class="wheel-slice2 wheel-slice-4"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice6" class="wheel-slice2 wheel-slice-6"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice8" class="wheel-slice2 wheel-slice-8"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice10" class="wheel-slice2 wheel-slice-10"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice12" class="wheel-slice2 wheel-slice-12"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice14" class="wheel-slice2 wheel-slice-14"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice16" class="wheel-slice2 wheel-slice-16"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice18" class="wheel-slice2 wheel-slice-18"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice20" class="wheel-slice2 wheel-slice-20"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice22" class="wheel-slice2 wheel-slice-22"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice24" class="wheel-slice2 wheel-slice-24"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice26" class="wheel-slice2 wheel-slice-26"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice28" class="wheel-slice2 wheel-slice-28"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice30" class="wheel-slice2 wheel-slice-30"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31"><p>WHEEL SLICE TITLE</p></div>
-				<div id="s2wBasicSlice32" class="wheel-slice2 wheel-slice-32"><p>WHEEL SLICE TITLE</p></div>
+					<div id="s2wBasicSlice1" class="wheel-slice wheel-slice-1 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice2" class="wheel-slice wheel-slice-2 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice3" class="wheel-slice wheel-slice-3 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice4" class="wheel-slice wheel-slice-4 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice5" class="wheel-slice wheel-slice-5 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice6" class="wheel-slice wheel-slice-6 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice7" class="wheel-slice wheel-slice-7 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice8" class="wheel-slice wheel-slice-8 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice9" class="wheel-slice wheel-slice-9 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice10" class="wheel-slice wheel-slice-10 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice11" class="wheel-slice wheel-slice-11 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice12" class="wheel-slice wheel-slice-12 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice13" class="wheel-slice wheel-slice-13 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice14" class="wheel-slice wheel-slice-14 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice15" class="wheel-slice wheel-slice-15 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice16" class="wheel-slice wheel-slice-16 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice17" class="wheel-slice wheel-slice-17 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice18" class="wheel-slice wheel-slice-18 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice19" class="wheel-slice wheel-slice-19 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice20" class="wheel-slice wheel-slice-20 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice21" class="wheel-slice wheel-slice-21 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice22" class="wheel-slice wheel-slice-22 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice23" class="wheel-slice wheel-slice-23 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice24" class="wheel-slice wheel-slice-24 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice25" class="wheel-slice wheel-slice-25 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice26" class="wheel-slice wheel-slice-26 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice27" class="wheel-slice wheel-slice-27 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice28" class="wheel-slice wheel-slice-28 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice29" class="wheel-slice wheel-slice-29 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice30" class="wheel-slice wheel-slice-30 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice31" class="wheel-slice wheel-slice-31 wheel-slice-trick"><p>COMING SOON!</p></div>
+					<div id="s2wBasicSlice32" class="wheel-slice wheel-slice-32 wheel-slice-trick-alt"><p>COMING SOON!</p></div>
 				</div>
 			</div>
 		</div>
 		<div id="bottomUI" class="widget-ui bottom-s s2w-bottom s2w-bottom-closedX">
-
+			<p style="text-align:center">The Spin to Win widget is currently closed. Please check again later.</p>
 		</div>
 	
 	</div>
 <script type="text/javascript" src="../widget.js"></script>
 <script type="text/javascript" src="../../api.js"></script>
-<script type="text/javascript" src="petApi.js"></script>
-<script type="text/javascript" src="petCare.js"></script>
-<script type="text/javascript" src="petAnimation.js"></script>
+<script type="text/javascript" src="s2wApi.js"></script>
 <script>
 	// ----- ONLOAD FUNCTIONS
 	
 	let widget_s2w_data; // We will store our s2w data here.
+	s2wOnLoad();
+	apiConnectS2W();
+	// ----- EVENT LISTENERS
+	document.getElementById('wheelTileBasic').addEventListener('mouseleave', s2wClearWidgetStyles);
 	
-
+	
+	document.getElementById('wheelTileBasic').addEventListener('mouseenter', function(){
+		document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('left', '-75%');
+		document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('z-index', '2');
+		document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('z-index', '0');
+		document.querySelector("div#wheelTileBasic").style.setProperty('width', '60%');
+		document.querySelector("div#bottomUI").style.setProperty('bottom', '-35px');
+	});
+	
+	document.getElementById('wheelTileDeluxe').addEventListener('mouseleave', s2wClearWidgetStyles);
+	
+	document.getElementById('wheelTileDeluxe').addEventListener('mouseenter', function(){
+		document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('left', '-140%');
+		document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('right', '-75%');
+		document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('z-index', '2');
+		document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('z-index', '0');
+		document.querySelector("div#wheelTileDeluxe").style.setProperty('width', '60%');
+		document.querySelector("div#wheelTileBasic").style.setProperty('width', '40%');
+		document.querySelector("div#bottomUI").style.setProperty('bottom', '-35px');
+	});
+	
+	
+	
+	
+	// ----- FUNCTIONS
+	function s2wOnLoad(){
+		document.querySelector('div.s2w-play-btn-container').style.setProperty('display','none');
+	}
+	
+	function s2wClearWidgetStyles(){
+	
+		document.querySelector("div#wheelTileBasic div.wheel-element").style='';
+		document.querySelector("div#wheelTileDeluxe div.wheel-element").style='';
+		document.querySelector("div#wheelTileBasic").style='';
+		document.querySelector("div#wheelTileDeluxe").style='';
+		document.querySelector("div#bottomUI").style='';
+		
+	}
+	
 </script>
 </body>
 

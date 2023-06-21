@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Spin to Win Wheel";
-	src: url('/fonts/LHFBostonTruckstyle.ttf');
+	src: url('./fonts/LHFBostonTruckstyle.ttf');
 	font-weight: normal;
 	font-style:bold;
 }
