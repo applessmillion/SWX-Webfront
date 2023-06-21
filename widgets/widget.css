@@ -5,7 +5,7 @@
 * Author: Justin Schwertmann
 * URI: https://www.smallworlds.app/
 * Created: 6/14/23
-* Last Edited: 6/15/23
+* Last Edited: 6/21/23
 */
 
 :root{
@@ -23,7 +23,10 @@ body, html{
 .widget-ui{
 	position:absolute;
 	left:0;
-	width:100%;
+    	width: 100%; /* Failsafe. */
+    	width: -moz-available; /* Chromium. */
+   	width: -webkit-fill-available;  /* Firefox. */
+ 	width: fill-available; /* Hopefully someday... */
 	z-index:3;
 }
 #topUI{
@@ -36,10 +39,17 @@ body, html{
 }
 #bottomUI{
 	bottom:0;
-	height:86px;
 	background-color:var(--widget-color-ui);
 	box-shadow:0px 0px 10px 4px #00000030;
 	padding:15px 6px 24px 6px;
+}
+
+.bottom-m{
+	height:86px;
+}
+
+.bottom-s{
+	height:45px;
 }
 
 #careButtons{
@@ -56,12 +66,15 @@ body, html{
 }
 
 .progress-bar{
-	margin:3px 20px 3px 5px;
+	margin:3px 2% 3px 5px;
 	border:2px white solid;
 	border-radius:10px;
 	height:8px;
 	background:var(--widget-color-progress-bg);
-	width:100%;
+    	width: 100%; /* Failsafe. */
+    	width: -moz-available; /* Chromium. */
+   	width: -webkit-fill-available;  /* Firefox. */
+ 	width: fill-available; /* Hopefully someday... */
 	box-shadow:inset 1px 2px 1px 0px rgba(35,35,35,0.1);
 	overflow:hidden;
 }
@@ -102,7 +115,10 @@ body, html{
 	position:inherit;
 	background: radial-gradient(circle, var(--widget-color-blue) 0%, var(--widget-color-blue-alt) 100%);
 	background-color:lightblue;
-	width:100%;
+    	width: 100%; /* Failsafe. */
+    	width: -moz-available; /* Chromium. */
+   	width: -webkit-fill-available;  /* Firefox. */
+ 	width: fill-available; /* Hopefully someday... */
 	height:100%;
 	overflow:hidden;
 	opacity:1;
