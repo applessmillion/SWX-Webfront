@@ -108,7 +108,7 @@ body, html{
 }
 
 .widget-overlay-dismissed{
-	animation: widgetLoadIn 1s ease-out forwards;
+	animation: widgetLoadIn 1.2s ease-out forwards;
 }
 
 .widget-overlay{
@@ -123,9 +123,9 @@ body, html{
 	overflow:hidden;
 	opacity:1;
 	z-index:15;
-	margin:auto;
-	text-align:center;
-	padding:65% 15px 15px 0px;
+	display: flex;
+    	align-items: center;
+    	justify-content: center;
 }
 
 .widget-button{
