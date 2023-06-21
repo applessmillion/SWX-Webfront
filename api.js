@@ -29,8 +29,13 @@ async function initAPI(callbackFunction=null){
 		// Test the API & world status and wait for a response <= apiTimeout
 		await fetch(swAPIURL+'me', { signal: controller.signal,})
 			.then(response => {
-				has_api_online = true;
-				api_user_info = response;
+				if(response.ok){
+					has_api_online = true;
+					api_user_info = response;
+				}else{
+					console.log('API is online, but the session is invalid.');
+					has_api_online = false;
+				}
 			})
 			.catch(error => {
 				if(error.name === 'AbortError'){
