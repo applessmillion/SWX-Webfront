@@ -81,9 +81,17 @@ body, html{
 	background-color:lightblue;
 	border-radius:12px;
 	border:3px #3399bf solid;
+	overflow:hidden;
+}
+
+.widget-m {
 	height:350px;
 	width:230px;
-	overflow:hidden;
+}
+
+.widget-l {
+	height:350px;
+	width:500px;
 }
 
 .widget-overlay-dismissed{
