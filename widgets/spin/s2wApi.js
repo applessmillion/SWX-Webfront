@@ -36,7 +36,7 @@ async function apiConnectS2W(){
 	// API is unreachable. Handle running locally without any calls.
 	if(!has_api_online){
 		// Display red top-bar to indicate an error has occured.
-		document.getElementById("topUI").style.background = "#ff5b5b";
+		document.getElementById("topUI").style.background = "linear-gradient(0deg, rgba(2,0,36,0) 0%, rgba(255,0,0,1) 100%)";
 		
 	}
 	// API has been reached. Connect and get details.
