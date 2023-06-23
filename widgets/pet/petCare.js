@@ -50,15 +50,15 @@ function petSwitchCareMode(mode=0){
 	// Trigger when our current mode is no care (0) and we are switching to care mode.
 	if(mode != 0){
 		if(mode == 1){ // Pat/happy mode 
-			document.getElementById('petWidget').className = "widget-box cursor-pat-enabled";
+			document.getElementById('petWidget').className = "widget-box widget-s cursor-pat-enabled";
 			document.getElementById('petDisplay').addEventListener('mouseover', petIncrementCare);
 		}
 		else if(mode == 2){ // food/health mode 
-			document.getElementById('petWidget').className = "widget-box cursor-food-enabled";
+			document.getElementById('petWidget').className = "widget-box widget-s cursor-food-enabled";
 			document.getElementById('petAssembly').addEventListener('click', petIncrementCare);
 		}
 		else if(mode == 3){ // Clean/hygiene mode 
-			document.getElementById('petWidget').className = "widget-box cursor-clean-enabled";
+			document.getElementById('petWidget').className = "widget-box widget-s cursor-clean-enabled";
 			document.getElementById('petDisplay').addEventListener('mouseover', petIncrementCare);
 		}
 	}

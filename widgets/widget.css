@@ -97,14 +97,25 @@ body, html{
 	overflow:hidden;
 }
 
+.widget-s {
+	height:350px;
+	width:240px;
+}
+
 .widget-m {
 	height:350px;
-	width:230px;
+	width:365px;
 }
 
 .widget-l {
 	height:350px;
-	width:500px;
+	width:490px;
+}
+
+
+.widget-xl {
+	height:400px;
+	width:740px;
 }
 
 .widget-overlay-dismissed{
