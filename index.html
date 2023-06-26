@@ -468,7 +468,7 @@ flex-direction:row;
 		setInterval( async function(){ 
 			getAPIresponse('avatar/findtotalonline');
 			document.getElementById("clockPlayers").innerHTML = response_data[0]+" Online Now";
-			if(response_data == "undefined"){ document.getElementById("clockPlayers").innerHTML = ""; }
+			if(response_data === "undefined"){ document.getElementById("clockPlayers").innerHTML = ""; }
 		}, 180000);
 		
 		// Get and display current SmallWorlds Time (SWT)
