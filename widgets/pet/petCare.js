@@ -66,7 +66,7 @@ function petSwitchCareMode(mode=0){
 	else if(mode == 0 && careMode != 0){
 		document.getElementById('petDisplay').removeEventListener('mouseover', petIncrementCare);
 		document.getElementById('petAssembly').removeEventListener('click', petIncrementCare);
-		document.getElementById('petWidget').className = 'widget-box'; // Clear cursor
+		document.getElementById('petWidget').className = 'widget-box widget-s'; // Clear cursor
 		
 		// Set time-out for emoting in case emotes still are handling in the background.
 		document.getElementById("petEmoteSpace").style.opacity = "0";
