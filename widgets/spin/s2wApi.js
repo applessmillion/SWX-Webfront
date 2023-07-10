@@ -5,7 +5,7 @@
 * Author: Justin Schwertmann
 * URI: https://www.smallworlds.app/
 * Created: 6/20/23
-* Last Edited: 6/20/23
+* Last Edited: 7/10/23
 */
 
 // ----- VARIABLES
@@ -49,8 +49,23 @@ async function apiConnectS2W(){
 	widgetOnAPILoad(has_api_online);
 }
 
-// Get details on requested avatar's s2w state.
+// Get details on requested account's s2w state.
 async function s2wLoadApiDetails(meID){
-}
 	
+	// Get time until next free spin.
+	
+	// Get count of deluxe spins left.
+	
+	// Get purchase option data.
+
+}
+
+// Handle free spin
+async function s2wFreeSpin(){
+	if(s2w_b_countdown > 0){
+		
+		console.log('Free spin is unavailable. Please try again in' + s2wFormatTimer(s2w_b_countdown) );
+		
+	}
+}
 
