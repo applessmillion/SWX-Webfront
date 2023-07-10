@@ -102,12 +102,26 @@ function s2wBasicWheelInit(){
 	document.querySelector("#s2wLogoDeluxe").style.setProperty('opacity', '0');
 }
 
+function s2wDeluxeWheelInit(){
+	// Remove event listeners that could mess with the focus.
+	document.getElementById('wheelTileBasic').removeEventListener('mouseenter', s2wBasicWheelFocus);
+	document.getElementById('wheelTileBasic').removeEventListener('mouseleave', s2wClearWidgetStyles);
+	document.getElementById('wheelTileDeluxe').removeEventListener('mouseenter', s2wDeluxeWheelFocus);
+	document.getElementById('wheelTileDeluxe').removeEventListener('mouseleave', s2wClearWidgetStyles);
+	
+	
+	// Hide other UI
+	document.querySelector("div#bottomUI").style.setProperty('opacity', '0');
+	document.querySelector("#wheelTileBasic").style.setProperty('opacity', '0');
+	document.querySelector("#s2wLogo").style.setProperty('opacity', '0');
+}
+
 function s2wOnLoad(){
 	document.querySelector('div.s2w-play-btn-container').style.setProperty('display','none');
 }
-	
-function s2wClearWidgetStyles(){
 
+// Remove all style elements from objects in widget.
+function s2wClearWidgetStyles(){
 	document.querySelector("div#wheelTileBasic div.wheel-element").style='';
 	document.querySelector("div#wheelTileDeluxe div.wheel-element").style='';
 	document.querySelector("div#wheelTileBasic").style='';
@@ -117,4 +131,3 @@ function s2wClearWidgetStyles(){
 	document.querySelector("#s2wLogo").style='';
 	
 }
-	
