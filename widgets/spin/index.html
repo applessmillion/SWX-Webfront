@@ -40,7 +40,6 @@
 		justify-content:space-between;
 		align-items:center;
 		top:0;
-
 	}
 	
 	.s2w-bottom{
@@ -115,6 +114,12 @@
 		text-shadow:1px 1px grey;
 	}
 	
+	#deluxePayTitle{
+		font-size:16px;
+		text-transform:capitalize;
+		margin:0;
+	}
+	
 	.wheel-slice-unset{ background: url(./images/wheel-slice/base.png) no-repeat; background-size:contain;}
 	.wheel-slice-blue{ background: url(./images/wheel-slice/blue.png) no-repeat; background-size:contain;}
 	.wheel-slice-lightblue{ background: url(./images/wheel-slice/blue-light.png) no-repeat; background-size:contain;}
@@ -161,23 +166,47 @@
 	.wheel-slice-32{ rotate:0deg;}
 	
 	.s2w-play-btn-container{
-	position:absolute;
-	height:80%;
-	width: 33%;
-    z-index: 5;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: space-evenly;
-    align-items: stretch;
-    flex-direction: column;
+		position:absolute;
+		height:80%;
+		min-width: 34%;
+		z-index: 5;
+		text-align: center;
+		display: flex;
+		flex-wrap: wrap;
+		align-content: center;
+		justify-content: space-evenly;
+		align-items: stretch;
+		flex-direction: column;
+		transition:1s;
+		top:35px;
 	}
 	
 	.s2w-img{
 		pointer-events:none;
 		width:fit-content;
 		height:fit-content;
+	}
+	
+	.swx-btn-widget{
+		color: #7FBDD1;
+		background-color: white;
+		border-radius: 8px;
+		padding: 6px 8px;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		border: 2px #7FBDD1 solid;
+		outline: 2px #ffffff00 solid;
+		transition:0.25s;
+	}
+	
+	.swx-btn-big{
+		font-size: 13px;
+		font-weight:600;
+	}
+	
+	.swx-btn-widget:hover{
+		outline: 2px #ffffffaa solid;
 	}
 	
 	</style>
@@ -192,11 +221,14 @@
 		</div>
 		<div id="s2wDisplay">
 			<div class="s2w-play-btn-container">
-				<button id="basicPlay" class="swx-btn-widget swx-btn-full swx-btn-big">SPIN TO WIN</button>
-				<button id="deluxePlay" class="swx-btn-widget swx-btn-full swx-btn-big">DELUXE SPIN</button>
-				<button id="deluxePay1" class="swx-btn-widget swx-btn-full">Buy [0] Spin for [1] Gold</button>
-				<button id="deluxePay2" class="swx-btn-widget swx-btn-full">Buy [0] Spin for [1] Gold</button>
-				<button id="deluxePay3" class="swx-btn-widget swx-btn-full">Buy [0] Spin for [1] Gold</button>
+				<button id="basicPlay" class="swx-btn-widget swx-btn-full swx-btn-big">SPIN NOW</button>
+				<button id="deluxePlay" class="swx-btn-widget swx-btn-full swx-btn-big">SPIN NOW</button>
+				<h2 id="deluxePayTitle">Purchase Spins</h2>
+				<button id="deluxePay1" class="swx-btn-widget swx-btn-full">123 Gold = 0 Spins</button>
+				<button id="deluxePay2" class="swx-btn-widget swx-btn-full">123 Gold = 0 Spins</button>
+				<button id="deluxePay3" class="swx-btn-widget swx-btn-full">123 Gold = 0 Spins</button>
+				<button id="deluxePay4" class="swx-btn-widget swx-btn-full">123 Gold = 0 Spins</button>
+				<button id="s2wInitBack" class="swx-btn-widget swx-btn-full">BACK</button>
 			</div>
 			<div id="wheelTileBasic" class="s2w-wheel-basic-hover">
 				<div class="wheel-element">
@@ -292,9 +324,24 @@
 	document.getElementById('wheelTileBasic').addEventListener('mouseleave', s2wClearWidgetStyles);
 	document.getElementById('wheelTileBasic').addEventListener('mouseenter', s2wBasicWheelFocus);
 	
-	
+	document.getElementById('wheelTileDeluxe').addEventListener('click', s2wDeluxeWheelInit);
 	document.getElementById('wheelTileDeluxe').addEventListener('mouseleave', s2wClearWidgetStyles);
 	document.getElementById('wheelTileDeluxe').addEventListener('mouseenter', s2wDeluxeWheelFocus);
+	
+	document.getElementById('s2wInitBack').addEventListener('click', s2wRevertWheelInit);
+	
+	
+	let widget_s2w_basic_deg = 0;
+	let widget_s2w_deluxe_deg = 0;
+	
+	function s2wGuessWheelDeg(){
+		widget_s2w_basic_deg += 3;
+		widget_s2w_deluxe_deg -= 3;
+		
+		if(widget_s2w_basic_deg >= 360){ widget_s2w_basic_deg -= 360; }
+		if(-1*(widget_s2w_deluxe_deg) >= 360){ widget_s2w_basic_deg += 360; }
+	}
+	
 	
 </script>
 </body>
