@@ -102,13 +102,13 @@ function s2wBasicWheelInit(){
 	document.querySelector("div#bottomUI").style.setProperty('bottom', '-50px');
 	// Transition wheel from css animation to JS-enforced transform style.
 	clearInterval(s2w_degree_guesser);
-	document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('animation', 'none');
+	document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('animation-play-state', 'paused');
 	document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('transition', '1s ease-out');
 	document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('transform', 'rotate('+ widget_s2w_basic_deg +'deg)');
 
 	// Transition wheel to a full stop, 
 	setTimeout(function(){
-		widget_s2w_basic_deg += 9;
+		widget_s2w_basic_deg += 2;
 		document.querySelector("div#wheelTileBasic div.wheel-element").style.setProperty('transform', 'rotate('+ widget_s2w_basic_deg +'deg)');
 	},35);
 	
@@ -142,13 +142,13 @@ function s2wDeluxeWheelInit(){
 	
 	// Transition wheel from css animation to JS-enforced transform style.
 	clearInterval(s2w_degree_guesser);
-	document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('animation', 'none');
+	document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('animation-play-state', 'paused');
 	document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('transition', '1s ease-out');
 	document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('transform', 'rotate('+ widget_s2w_deluxe_deg +'deg)');
 
 	// Transition wheel to a full stop, 
 	setTimeout(function(){
-		widget_s2w_deluxe_deg -= 9;
+		widget_s2w_deluxe_deg -= 2;
 		document.querySelector("div#wheelTileDeluxe div.wheel-element").style.setProperty('transform', 'rotate('+ widget_s2w_deluxe_deg +'deg)');
 	},35);
 	
