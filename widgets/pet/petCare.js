@@ -5,7 +5,7 @@
 * Author: Justin Schwertmann
 * URI: https://www.smallworlds.app/
 * Created: 6/12/23
-* Last Edited: 6/15/23
+* Last Edited: 7/15/23
 */
 
 // ----- VARIABLES AND CONSTANTS
@@ -74,7 +74,6 @@ function petSwitchCareMode(mode=0){
 		setTimeout( function(){ is_pet_emoting = false; }, 500);
 		
 		is_pet_idle = true; // Put our pet back into idling.
-		handlePetIdleAnimation(); // Start back up idle loop.
 	}
 	// Change careMode to mode, the arg passed to this function.
 	if(mode > 3) { mode = 0 } // Handle mode greater than 3 & treat as a reset.
